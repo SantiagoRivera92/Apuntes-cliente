@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1 - Tabla dinámica</title>
+    <style>
+        table { border-collapse: collapse; }
+        td { border: 1px solid #333; padding: 6px 12px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Tabla generada con JavaScript</h1>
+
+    <script>
+        // Pedimos las dimensiones de la tabla
+        var filas = parseInt(prompt("Introduce el número de filas:"));
+        var columnas = parseInt(prompt("Introduce el número de columnas:"));
+
+        if (isNaN(filas) || isNaN(columnas) || filas < 1 || columnas < 1) {
+            document.write("<p>Debes introducir números enteros mayores que 0.</p>");
+        } else {
+            document.write("<table>");
+            for (var i = 0; i < filas; i++) {
+                document.write("<tr>");
+                for (var j = 0; j < columnas; j++) {
+                    // En cada celda: índice de fila, índice de columna
+                    document.write("<td>" + i + "," + j + "</td>");
+                }
+                document.write("</tr>");
+            }
+            document.write("</table>");
+        }
+    </script>
+</body>
+</html>
