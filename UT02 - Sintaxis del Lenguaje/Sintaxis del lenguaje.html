@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sintaxis del lenguaje.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+<link rel="stylesheet" href="file://D:\\DAW2\\markdown2.css" type="text/css">
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file://C:\\Users\\DAW2\\Documents\\markdown2.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="la-sintaxis-de-javascript">La sintaxis de JavaScript</h1>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#la-sintaxis-de-javascript">La sintaxis de JavaScript</a>
+<ul>
+<li><a href="#%C3%ADndice">Índice</a></li>
+<li><a href="#convenciones-de-nombres">Convenciones de nombres</a>
+<ul>
+<li><a href="#nombres-descriptivos">Nombres descriptivos</a></li>
+<li><a href="#%C3%ADndices-y-contadores">Índices y contadores</a></li>
+<li><a href="#constantes-clases-y-variables">Constantes, clases y variables</a></li>
+<li><a href="#tipos-de-datos">Tipos de datos</a>
+<ul>
+<li><a href="#ejemplos">Ejemplos</a></li>
+</ul>
+</li>
+<li><a href="#declaraci%C3%B3n-de-variables">Declaración de variables</a></li>
+<li><a href="#%C3%A1mbito-de-las-variables">Ámbito de las variables</a></li>
+<li><a href="#%C3%A1mbito-de-las-variables-hoisting">Ámbito de las variables. Hoisting</a></li>
+<li><a href="#%C3%A1mbito-de-las-variables-declaraci%C3%B3n-con-var">Ámbito de las variables. Declaración con var</a></li>
+<li><a href="#%C3%A1mbito-de-las-variables-declaraci%C3%B3n-con-let">Ámbito de las variables. Declaración con let</a></li>
+</ul>
+</li>
+<li><a href="#operadores">Operadores</a>
+<ul>
+<li><a href="#aritm%C3%A9ticos">Aritméticos</a></li>
+<li><a href="#ternario">Ternario</a></li>
+<li><a href="#concatenaci%C3%B3n-de-strings">Concatenación de strings</a></li>
+<li><a href="#operadores-l%C3%B3gicos">Operadores lógicos</a></li>
+<li><a href="#bitwise">Bitwise</a></li>
+<li><a href="#operaciones-de-comparaci%C3%B3n">Operaciones de comparación</a></li>
+</ul>
+</li>
+<li><a href="#propiedades-globales-y-funciones-globales">Propiedades globales y funciones globales</a></li>
+<li><a href="#conversi%C3%B3n-de-tipos">Conversión de tipos</a></li>
+<li><a href="#arrays">Arrays</a>
+<ul>
+<li><a href="#declaraci%C3%B3nes-de-arrays">Declaraciónes de arrays</a></li>
+<li><a href="#funciones-predefinidas-t%C3%ADpicas-de-arrays">Funciones predefinidas típicas de Arrays</a>
+<ul>
+<li><a href="#ejemplos-de-funciones-de-arrays">Ejemplos de funciones de arrays</a></li>
+<li><a href="#resultado-de-la-ejecuci%C3%B3n">Resultado de la ejecución</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="convenciones-de-nombres">Convenciones de nombres</h2>
+<h3 id="nombres-descriptivos">Nombres descriptivos</h3>
+<ul>
+<li>Una mala costumbre habitual cuando se empieza en la programación es darle un nombre muy poco descriptivo</li>
+<li>A medida que el código crece, se vuelve insostenible</li>
+<li>Evita nombres poco claros o inconsistentes como tmp, a, b2, variable2, etc</li>
+</ul>
+<h3 id="índices-y-contadores">Índices y contadores</h3>
+<ul>
+<li>Cuando trabajamos en bucles for (o bucles en general)</li>
+<li>El ámbito de una variable que actúa como contador (índice) es muy reducido (esa variable solo existe y afecta al interior del bucle)</li>
+<li>Las variables que actúan como contador suelen nombrarse con una letra minúscula empezand desde i: <code>i</code>, <code>j</code>, <code>k</code>, etc. A veces también se usan letras como <code>a</code>, <code>b</code>, <code>c</code>... o la inicial minúscula de lo que representan: <code>c</code> para un contador, <code>p</code> para una posición, etc.</li>
+</ul>
+<h3 id="constantes-clases-y-variables">Constantes, clases y variables</h3>
+<ul>
+<li>Las <strong>constantes</strong> son variables que no varían su valor a lo largo del programa. Deben ir siempre en <strong>MAYÚSCULAS</strong></li>
+<li>Las <strong>clases</strong> son estructuras de código más complejas. Los nombres de las clases se escriben en PascalCase.</li>
+<li>Las variables, por último siempre en <strong>camelCase</strong></li>
+</ul>
+<h3 id="tipos-de-datos">Tipos de datos</h3>
+<ul>
+<li>JS es un lenguaje de <strong>tipado débil</strong> porque cuando se declara una variable no se indica su tipo.</li>
+<li>JS es un lenguaje de <strong>tipado dinámico</strong> porque las variables pueden cambiar de tipo en tiempo de ejecución.</li>
+<li>Existen dos tipos de datos:
+<ul>
+<li><strong>Primitivos</strong> (inmutables)
+<ul>
+<li><strong>Boolean</strong></li>
+<li><strong>Number</strong> (64 bits)</li>
+<li><strong>String</strong></li>
+<li><strong>Null</strong></li>
+<li><strong>Undefined</strong></li>
+</ul>
+</li>
+<li><strong>Objetos</strong> (mutables, todo lo que no sean primitivos, incluyendo funciones)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="ejemplos">Ejemplos</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> numero1=<span class="hljs-number">1</span>;       <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> numero1);     <span class="hljs-comment">//number</span>
+<span class="hljs-keyword">let</span> numero2=<span class="hljs-number">1.03</span>;    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> numero2);     <span class="hljs-comment">//number</span>
+<span class="hljs-keyword">let</span> booleano = <span class="hljs-literal">true</span>; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> booleano);    <span class="hljs-comment">//boolean</span>
+<span class="hljs-keyword">let</span> cadena=<span class="hljs-string">&quot;Hola&quot;</span>;   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> cadena);      <span class="hljs-comment">//string</span>
+<span class="hljs-keyword">let</span> nulo=<span class="hljs-literal">null</span>;       <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> nulo);        <span class="hljs-comment">//object</span>
+                     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(nulo);               <span class="hljs-comment">//null</span>
+<span class="hljs-keyword">let</span> indefinido;      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> indefinido);  <span class="hljs-comment">//undefined</span>
+                     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(indefinido);         <span class="hljs-comment">//undefined</span>
+<span class="hljs-keyword">let</span> objeto = {<span class="hljs-attr">a</span>:<span class="hljs-number">1</span>};  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> objeto);      <span class="hljs-comment">//object</span>
+</div></code></pre>
+<p>El operador &quot;typeof&quot; devuelve el tipo de dato de una variable declarada.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> a=<span class="hljs-number">123</span>;
+a=<span class="hljs-string">&quot;Hola&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// Hola</span>
+</div></code></pre>
+<p>El tipo de la variable puede cambiar en tiempo de ejecución sin problemas.</p>
+<p>En algunos casos, typeof resulta insuficiente porque en tipos de datos más avanzados simplemente nos indica que son objetos.</p>
+<p>Con <code>constructor.name</code> podemos obtener el tipo de constructor que se utiliza.</p>
+<p>Ejemplos:</p>
+<pre class="hljs"><code><div><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>) <span class="hljs-comment">// String</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(number.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>) <span class="hljs-comment">// Number</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(boolean.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>) <span class="hljs-comment">// Boolean</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(notDefined.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>) <span class="hljs-comment">// ERROR, sólo funciona con variables definidas</span>
+</div></code></pre>
+<hr>
+<h3 id="declaración-de-variables">Declaración de variables</h3>
+<ul>
+<li>Se pueden declarar variables de tres formas
+<ul>
+<li><strong>Directamente (<code>a = 2</code>)</strong>. Es la opción menos recomendada. A partir de ES5 se recomienda usar el modo estricto escribiendo en la primera línea del fichero &quot;use strict&quot;; con lo que se impide declaraciones directas.</li>
+<li><strong>Utilizando <code>var</code></strong>: permite declarar una variable cuyo ámbito es la función donde se define o global (si se define fuera de una función)</li>
+<li><strong>Utilizando <code>let</code></strong>: es la opción recomendada. La definición tiene ámbito de bloque de código, de función o global si se define en la raíz del documetno. Disponible a partir de ES6.</li>
+</ul>
+</li>
+<li>Las constantes se definen con <code>const</code> y tienen ámbito de bloque.</li>
+</ul>
+<h3 id="ámbito-de-las-variables">Ámbito de las variables</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> a1=<span class="hljs-number">1</span>;          <span class="hljs-comment">// Ámbito global</span>
+<span class="hljs-comment">//...</span>
+{                  <span class="hljs-comment">// Ámbito de bloque</span>
+    <span class="hljs-keyword">let</span> a2=<span class="hljs-number">2</span>;
+    <span class="hljs-comment">//...</span>
+}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>) {     <span class="hljs-comment">// Ámbito de función</span>
+    <span class="hljs-keyword">let</span> a3=<span class="hljs-number">3</span>;
+    <span class="hljs-comment">//...</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){     <span class="hljs-comment">// Ámbito de bloque</span>
+        <span class="hljs-keyword">let</span> a4=<span class="hljs-number">4</span>;
+        <span class="hljs-comment">//...</span>
+    }
+}
+</div></code></pre>
+<p>Las funciones <strong>IIFE</strong> (Immediately-invoked function expressions) o <strong>funciones autoinvocadas</strong> permiten encapsular variables declaradas mediante <code>var</code> creando un ámbito local</p>
+<pre class="hljs"><code><div>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){
+    <span class="hljs-comment">//....</span>
+}());
+</div></code></pre>
+<pre class="hljs"><code><div>(<span class="hljs-keyword">function</span>(<span class="hljs-params">n</span>){
+    <span class="hljs-keyword">var</span> saludo=<span class="hljs-string">&quot;Hola&quot;</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(saludo+n) <span class="hljs-comment">// Hola Juan</span>
+}(<span class="hljs-string">&quot;Juan&quot;</span>))
+</div></code></pre>
+<h3 id="ámbito-de-las-variables-hoisting">Ámbito de las variables. Hoisting</h3>
+<pre class="hljs"><code><div><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//undefined</span>
+<span class="hljs-keyword">var</span> a=<span class="hljs-number">1</span>;
+{
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+}
+
+(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//1</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">//undefined</span>
+    <span class="hljs-keyword">var</span> b=<span class="hljs-number">2</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">//2</span>
+}());
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">//Error: b is not defined</span>
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//Error: a is not defined</span>
+<span class="hljs-keyword">let</span> a=<span class="hljs-number">1</span>;
+{
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+}
+
+(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">//Error: b is not defined</span>
+    <span class="hljs-keyword">let</span> b=<span class="hljs-number">2</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b); <span class="hljs-comment">// 2</span>
+}());
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b);  <span class="hljs-comment">//Error: b is not defined</span>
+</div></code></pre>
+<h3 id="ámbito-de-las-variables-declaración-con-var">Ámbito de las variables. Declaración con var</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> a=<span class="hljs-number">1</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span>
+{
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+}
+(<span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+    }
+})
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> a=<span class="hljs-number">1</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span>
+(<span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">var</span> a=<span class="hljs-number">2</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a) <span class="hljs-comment">// 2</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-keyword">var</span> a=<span class="hljs-number">3</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 3</span>
+    }
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 3</span>
+})();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+<span class="hljs-keyword">var</span> a=<span class="hljs-number">5</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 5;</span>
+</div></code></pre>
+<h3 id="ámbito-de-las-variables-declaración-con-let">Ámbito de las variables. Declaración con let</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> a=<span class="hljs-number">1</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span>
+{
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+}
+(<span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+    }
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//1</span>
+})();
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 1</span>
+(<span class="hljs-keyword">function</span> <span class="hljs-title function_">f</span>(<span class="hljs-params"></span>){
+    <span class="hljs-keyword">let</span> a = <span class="hljs-number">2</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 2</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-keyword">let</span> a=<span class="hljs-number">3</span>;
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 3</span>
+    }
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 2</span>
+})();
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span>
+<span class="hljs-keyword">let</span> a = <span class="hljs-number">5</span>; <span class="hljs-comment">// Error: already declared</span>
+</div></code></pre>
+<h2 id="operadores">Operadores</h2>
+<h3 id="aritméticos">Aritméticos</h3>
+<ul>
+<li>Suma: a+b</li>
+<li>Resta: a-b</li>
+<li>Multiplicación: a*b</li>
+<li>División: a/b</li>
+<li>Resto de división: a%b</li>
+<li>Exponenciación: a**b</li>
+<li>Incremento: ++</li>
+<li>Decremento: --</li>
+</ul>
+<h3 id="ternario">Ternario</h3>
+<pre class="hljs"><code><div>(condicion)? <span class="hljs-attr">instruccion1</span>: instruccion2
+</div></code></pre>
+<h3 id="concatenación-de-strings">Concatenación de strings</h3>
+<pre class="hljs"><code><div><span class="hljs-string">&quot;string1&quot;</span> + <span class="hljs-string">&quot;string2&quot;</span>
+</div></code></pre>
+<h3 id="operadores-lógicos">Operadores lógicos</h3>
+<ul>
+<li>AND: <code>a&amp;&amp;b</code></li>
+<li>OR: <code>a||b</code></li>
+<li>NOT: <code>!a</code></li>
+</ul>
+<h3 id="bitwise">Bitwise</h3>
+<ul>
+<li>AND: <code>a&amp;b</code></li>
+<li>OR: <code>a|b</code></li>
+<li>XOR: <code>a^b</code></li>
+<li>NOT: <code>~a</code></li>
+<li>Shift Left: <code>a&lt;&lt;b</code></li>
+<li>Shift Right: <code>a&gt;&gt;b</code></li>
+</ul>
+<h3 id="operaciones-de-comparación">Operaciones de comparación</h3>
+<ul>
+<li><code>&gt;, &lt;, &gt;=, &lt;=, ==, !=</code></li>
+<li><code>===</code> (igualdad estricta)</li>
+<li><code>!==</code> (desigualdad estricta)</li>
+</ul>
+<hr>
+<h2 id="propiedades-globales-y-funciones-globales">Propiedades globales y funciones globales</h2>
+<ul>
+<li><code>Infinity</code>: Representa el valor infinito</li>
+<li><code>NaN</code>: Not a number</li>
+<li><code>null</code>: valor nulo</li>
+<li><code>isFinite()</code>, <code>isNaN()</code>, <code>parseFloat()</code>, <code>parseInt()</code></li>
+</ul>
+<h2 id="conversión-de-tipos">Conversión de tipos</h2>
+<ul>
+<li>Se puede cambiar el tipo de las variables dinámicamente (incluso en el modo &quot;use strict&quot;).</li>
+<li>Para convertir entre tipos se pueden utilizart los métodos:
+<ul>
+<li>parseInt()</li>
+<li>parseFloat()</li>
+<li>toString()</li>
+<li>eval()</li>
+</ul>
+</li>
+</ul>
+<p>Cuando hacemos una asignación o como resultado de una expresió nhay que tener en cuenta la <code>coerción de tipos</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">&quot;use strict&quot;</span>
+<span class="hljs-keyword">let</span> a=<span class="hljs-number">1</span>;
+a=<span class="hljs-string">&quot;hola&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// hola</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;123.45&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(b) <span class="hljs-comment">// 123</span>
+<span class="hljs-keyword">let</span> c = <span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;123.45&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(c) <span class="hljs-comment">// 123.45</span>
+<span class="hljs-keyword">let</span> d = <span class="hljs-number">46</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d.<span class="hljs-title function_">toString</span>(<span class="hljs-number">2</span>)); <span class="hljs-comment">// 101110</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(d.<span class="hljs-title function_">toString</span>(<span class="hljs-number">16</span>)); <span class="hljs-comment">// 2e</span>
+<span class="hljs-keyword">let</span> e=<span class="hljs-built_in">eval</span>(<span class="hljs-string">&quot;2+4+parseInt(1.2)&quot;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e); <span class="hljs-comment">// 7</span>
+</div></code></pre>
+<hr>
+<h2 id="arrays">Arrays</h2>
+<h3 id="declaraciónes-de-arrays">Declaraciónes de arrays</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> lista1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>();
+<span class="hljs-keyword">let</span> lista2 = <span class="hljs-title class_">Array</span>();
+<span class="hljs-keyword">let</span> lista3 = [];
+
+lista1[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(lista1[<span class="hljs-number">0</span>]);
+lista1[<span class="hljs-number">5</span>] = <span class="hljs-string">&quot;Pepe&quot;</span>;
+
+<span class="hljs-comment">// For clásico</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt;lista1.<span class="hljs-property">length</span>; i++){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i, lista1[i]) <span class="hljs-comment">// 0 1, 1 undefined, 2 undefined, 3 undefined, 4 undefined, 5 Pepe</span>
+}
+
+<span class="hljs-comment">// Foreach: ignora los undefined</span>
+lista1.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">element, index</span>) =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(index, element)); <span class="hljs-comment">// 0 1, 5 Pepe</span>
+
+
+lista1[<span class="hljs-string">&quot;pos1&quot;</span>] = <span class="hljs-string">&quot;Laura&quot;</span>; 
+lista1.<span class="hljs-property">pos2</span> = <span class="hljs-string">&quot;Santi&quot;</span>;
+
+<span class="hljs-comment">// For clásico</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt;lista1.<span class="hljs-property">length</span>; i++){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i, lista1[i]) <span class="hljs-comment">// 0 1, 1 undefined, 2 undefined, 3 undefined, 4 undefined, 5 Pepe</span>
+}
+
+<span class="hljs-comment">// Foreach: ignora los undefined</span>
+lista1.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">element, index</span>) =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(index, element)); <span class="hljs-comment">// 0 1, 5 Pepe</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(lista1.<span class="hljs-property">pos1</span>) <span class="hljs-comment">// Laura</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(lista1[<span class="hljs-string">&quot;pos2&quot;</span>]) <span class="hljs-comment">// Santi</span>
+</div></code></pre>
+<hr>
+<h3 id="funciones-predefinidas-típicas-de-arrays">Funciones predefinidas típicas de Arrays</h3>
+<ul>
+<li><code>length</code>: propiedad que devuelve el número de elementos</li>
+<li><code>concat()</code>: permite concatenar varios arrays</li>
+<li><code>join()</code>: une los elementos de un array y los almacena en un string</li>
+<li><code>pop()</code>: extrae el último elemento de un array</li>
+<li><code>push()</code>: añade un elemento al final del array</li>
+<li><code>shift()</code>: extrae el primer el emento de un array</li>
+<li><code>unshift()</code>: añade un elemento al comienzo del array</li>
+<li><code>reverse()</code>: invierte la posición de los elementos del array</li>
+<li><code>sort()</code>: ordena un array</li>
+<li><code>indexOf()</code>: devuelve la posición de un elemento en el array</li>
+<li><code>lastIndexOf()</code>: devuelve la posición final de un elemento en el array</li>
+<li><code>slice()</code>: devuelve un nuevo array con parte de los elementos del array inicial</li>
+<li><code>splice()</code>: cambia el contenido de un array: inserta, reemplaza o borra elementos del array</li>
+</ul>
+<hr>
+<h4 id="ejemplos-de-funciones-de-arrays">Ejemplos de funciones de arrays</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> array1 = []
+<span class="hljs-keyword">let</span> array2 = []
+
+array1.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;Hola&quot;</span>)
+array1.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;Adiós&quot;</span>)
+array2.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;Hola2&quot;</span>)
+array2.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;Adiós2&quot;</span>)
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 1:&quot;</span>, array1.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 2:&quot;</span>, array2.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+<span class="hljs-keyword">let</span> array3 = array1.<span class="hljs-title function_">concat</span>(array2)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">pop</span>()
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3 después de un pop:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">shift</span>()
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3 después de un shift:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">unshift</span>(<span class="hljs-string">&quot;Hola3&quot;</span>)
+array3.<span class="hljs-title function_">unshift</span>(<span class="hljs-string">&quot;Adiós3&quot;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3 después de dos unshift:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">reverse</span>()
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3 después de un reverse:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">sort</span>()
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 3 después de un sort:&quot;</span>, array3.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array3.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;Hola2&quot;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Posición de &#x27;Hola2&#x27; en el array3:&quot;</span>, array3.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&quot;Hola2&quot;</span>))
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Posición final de &#x27;Hola2&#x27; en el array3:&quot;</span>, array3.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&quot;Hola2&quot;</span>))
+
+array4 = array3.<span class="hljs-title function_">slice</span>(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 4 (slice de array3):&quot;</span>, array4.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 1 antes de un splice:&quot;</span>, array1.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+array1.<span class="hljs-title function_">splice</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;Hola333&quot;</span>, <span class="hljs-string">&quot;Adiós1&quot;</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 1 después de un splice:&quot;</span>, array1.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+
+array1.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.<span class="hljs-property">length</span> - b.<span class="hljs-property">length</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Array 1 después de un sort por longitud:&quot;</span>, array1.<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; / &quot;</span>))
+</div></code></pre>
+<hr>
+<h4 id="resultado-de-la-ejecución">Resultado de la ejecución</h4>
+<blockquote>
+<p>Array 1: Hola / Adiós<br>
+Array 2: Hola2 / Adiós2<br>
+Array 3: Hola / Adiós / Hola2 / Adiós2<br>
+Array 3 después de un pop: Hola / Adiós / Hola2<br>
+Array 3 después de un shift: Adiós / Hola2<br>
+Array 3 después de dos unshift: Adiós3 / Hola3 / Adiós / Hola2<br>
+Array 3 después de un reverse: Hola2 / Adiós / Hola3 / Adiós3<br>
+Array 3 después de un sort: Adiós / Adiós3 / Hola2 / Hola3<br>
+Posición de 'Hola2' en el array3: 2<br>
+Posición final de 'Hola2' en el array3: 4<br>
+Array 4 (slice de array3): Adiós3 / Hola2 / Hola3<br>
+Array 1 antes de un splice: Hola / Adiós<br>
+Array 1 después de un splice: Hola / Hola333 / Adiós1<br>
+Array 1 después de un sort por longitud: Hola / Adiós1 / Hola333</p>
+</blockquote>
+<hr>
+
+</body>
+</html>
